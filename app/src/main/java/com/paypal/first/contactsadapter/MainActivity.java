@@ -7,18 +7,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class GetPhoneNumber extends Activity {
+public class MainActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.getphone);
+        setContentView(R.layout.activity_main);
 
         Button oldContactListButton = (Button) findViewById(R.id.contactButton);
         oldContactListButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GetPhoneNumber.this, ContactListActivity.class);
+                Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
                 startActivity(intent);
             }
         });
@@ -27,7 +27,7 @@ public class GetPhoneNumber extends Activity {
         newContactListButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GetPhoneNumber.this, NewListActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewListActivity.class);
                 startActivity(intent);
             }
         });
