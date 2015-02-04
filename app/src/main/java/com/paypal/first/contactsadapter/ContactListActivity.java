@@ -15,7 +15,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,98 +22,33 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ContactListActivity extends Activity implements
-        OnItemClickListener {
+public class ContactListActivity extends Activity {
 
-    private ListView listView;
-    private List<ContactBean> list = new ArrayList<ContactBean>();
-    private Button button1;
-    private CheckBox groupcheckbox;
-    // SharedPreferences pref;
-    // private String inputPhoneNumber;
-    // private String inputname;
-    private String tvname;
-    private String tvphone;
-    String phoNum = "";
+    public static final String TAG = "APPLOGS::Contacts::ContactListActivity: %s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Intent intent = getIntent();
-        phoNum = intent.getStringExtra("num");
-        CheckBox groupcCheckBox = (CheckBox) findViewById(R.id.groupcheckbox);
-        button1 = (Button) findViewById(R.id.grp);
-        button1.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+        ListView listView = (ListView) findViewById(R.id.list);
 
-                String query = "";
-                query += phoNum + "-";
-                for (ContactBean cb : list) {
-                    Log.i("grp", cb.isChecked() + "");
-                    if (cb.isChecked()) {
-                        query += cb.getPhoneNo().trim() + "," + cb.getName().trim() + ":";
-                        //Intent i= new Intent(ContactListActivity.this, GroupActivity.class);
-                        //startActivity(i);
-                    }
-                }
-                Log.i("contact", query);
-//				SendContactInfo contactInfo = new SendContactInfo();
-//				contactInfo.execute(query);
-            }
-        });
-        TextView tvname = (TextView) findViewById(R.id.tvname);
-        TextView tvphone = (TextView) findViewById(R.id.tvphone);
+        List<ContactBean> list = new ArrayList<>();
+        list.clear();
+        list.addAll(doGetListOfContactBean());
 
-        listView = (ListView) findViewById(R.id.list);
-        listView.setOnItemClickListener(this);
-        /*
-		 * pref = getPreferences(MODE_PRIVATE); String tvname1 =
-		 * pref.getString("inputname", null); String tvphone1 =
-		 * pref.getString("inputphonenumber", null); if (tvname != null) {
-		 * groupcheckbox.setChecked(true); if(tvphone !=null){
-		 * groupcheckbox.setChecked(true); } } tvname.setText(tvname1);
-		 * tvphone.setText(tvphone1); else { groupcheckbox.setChecked(false); }
-		 */
-
-        Cursor phones = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,
-                null, null);
-        while (phones.moveToNext()) {
-
-            String name = phones
-                    .getString(phones
-                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-
-            String phoneNumber = phones
-                    .getString(phones
-                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-            ContactBean objContact = new ContactBean();
-            objContact.setName(name);
-            objContact.setPhoneNo(phoneNumber);
-            list.add(objContact);
-
-        }
-        phones.close();
-
-        ContanctAdapter objAdapter = new ContanctAdapter(
-                ContactListActivity.this, R.layout.alluser_row, list);
+        ContactAdapter objAdapter = new ContactAdapter(ContactListActivity.this, R.layout.alluser_row, list);
         listView.setAdapter(objAdapter);
-        // SparseBooleanArray mChecked = new SparseBooleanArray();
 
         if (null != list && list.size() != 0) {
             Collections.sort(list, new Comparator<ContactBean>() {
-
                 @Override
                 public int compare(ContactBean lhs, ContactBean rhs) {
                     return lhs.getName().compareTo(rhs.getName());
                 }
             });
-            AlertDialog alert = new AlertDialog.Builder(
-                    ContactListActivity.this).create();
+
+            AlertDialog alert = new AlertDialog.Builder(ContactListActivity.this).create();
             alert.setTitle("");
 
             alert.setMessage(list.size() + " Contact Found!!!");
@@ -133,15 +67,33 @@ public class ContactListActivity extends Activity implements
         }
     }
 
+    private List<ContactBean> doGetListOfContactBean() {
+        List<ContactBean> contacts = new ArrayList<ContactBean>();
+        Cursor phones = getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null,
+                null, null);
+        while (phones.moveToNext()) {
+
+            String name = phones
+                    .getString(phones
+                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+
+            String contactNumber = phones
+                    .getString(phones
+                            .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+            ContactBean objContact = new ContactBean();
+            objContact.setName(name);
+            objContact.setPhoneNo(contactNumber);
+            contacts.add(objContact);
+
+        }
+        phones.close();
+
+        return contacts;
+    }
+
     private void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-
-    }
-
-
 }

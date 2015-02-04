@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class GetPhoneNumber extends Activity {
-    String phonum = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,11 +20,10 @@ public class GetPhoneNumber extends Activity {
             @Override
             public void onClick(View v) {
                 EditText et = (EditText) findViewById(R.id.num);
-                phonum = et.getText().toString();
+                String phoneNumber = et.getText().toString();
                 Intent intent = new Intent(GetPhoneNumber.this, ContactListActivity.class);
-                intent.putExtra("num", phonum);
+                intent.putExtra("phoneNumber", phoneNumber);
                 startActivity(intent);
-                //Send it to Rest service on postexecute show next scree
             }
         });
 

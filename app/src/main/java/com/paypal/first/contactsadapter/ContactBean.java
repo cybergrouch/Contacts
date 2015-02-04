@@ -3,26 +3,6 @@ package com.paypal.first.contactsadapter;
 public class ContactBean {
     private String name;
     private String phoneNo;
-    private String checkbox;
-    private boolean isChecked = false;
-
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-
-    public void setChecked(boolean isChecked) {
-        this.isChecked = isChecked;
-    }
-
-    public String getCheckbox() {
-        return checkbox;
-    }
-
-    public void setCheckbox(String checkbox) {
-        this.checkbox = checkbox;
-    }
 
     public String getName() {
         return name;

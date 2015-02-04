@@ -6,18 +6,6 @@
     android:background="@drawable/bg_row"
     android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/groupcheckbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:gravity="right|center"
-        android:paddingRight="10dp" />
-
     <TextView
         android:id="@+id/tvname"
         android:layout_width="fill_parent"

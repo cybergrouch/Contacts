@@ -21,16 +21,6 @@
 
         <activity android:name=".ContactListActivity" />
 
-        <activity
-            android:name=".GroupActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN3" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
