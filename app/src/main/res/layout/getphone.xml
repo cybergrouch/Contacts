@@ -6,8 +6,21 @@
         android:id="@+id/contactButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="51dp"
-        android:layout_marginTop="47dp"
-        android:text="Go To Contacts" />
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="146dp"
+        android:text="Go To Contacts"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="49dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Contracts List"
+        android:id="@+id/newContractsListButton"
+        android:layout_below="@+id/contactButton"
+        android:layout_alignLeft="@+id/contactButton"
+        android:layout_alignStart="@+id/contactButton" />
 
 </RelativeLayout>

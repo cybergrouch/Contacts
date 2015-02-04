@@ -13,12 +13,21 @@ public class GetPhoneNumber extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.getphone);
-        Button but = (Button) findViewById(R.id.contactButton);
-        but.setOnClickListener(new OnClickListener() {
 
+        Button oldContactListButton = (Button) findViewById(R.id.contactButton);
+        oldContactListButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GetPhoneNumber.this, ContactListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button newContactListButton = (Button) findViewById(R.id.newContractsListButton);
+        newContactListButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GetPhoneNumber.this, NewListActivity.class);
                 startActivity(intent);
             }
         });
