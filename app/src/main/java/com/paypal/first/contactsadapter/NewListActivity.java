@@ -34,14 +34,14 @@ public class NewListActivity extends Activity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                Person person = new Person();
+                long timestamp = System.currentTimeMillis();
+                person.setFirstName("firstname_timer-" + timestamp);
+                person.setLastName("lastname_timer-" + timestamp);
+                person.setAge((int) timestamp % 50);
+                listPerson.add(person);
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        Person person = new Person();
-                        long timestamp = System.currentTimeMillis();
-                        person.setFirstName("firstname_timer-" + timestamp);
-                        person.setLastName("lastname_timer-" + timestamp);
-                        person.setAge((int) timestamp % 50);
-                        listPerson.add(person);
                         adapter.notifyDataSetChanged();
                     }
                 });
